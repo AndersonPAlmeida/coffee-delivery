@@ -14,6 +14,7 @@ export const GlobalStyle = createGlobalStyle`
    body {
       background: ${({ theme }) => theme.background};
       color: ${({ theme }) => theme['base-title']};
+      padding: 0 1rem;
    }
 
    body, input-security, textarea, button{
