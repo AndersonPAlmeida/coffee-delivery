@@ -17,7 +17,11 @@ export const GlobalStyle = createGlobalStyle`
       padding: 0 1rem;
    }
 
-   body, input-security, textarea, button{
+   a {
+      text-decoration: none;
+   }
+   
+   body, input, textarea, button{
       /* font-family: 'Baloo 2', sans-serif; */
       font-family: 'Roboto', sans-serif;  
       font-size: 1.4rem;
