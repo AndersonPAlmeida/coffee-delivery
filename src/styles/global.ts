@@ -1,4 +1,5 @@
 import { createGlobalStyle } from 'styled-components'
+import { textStyle } from './textStyle'
 
 export const GlobalStyle = createGlobalStyle`
    * {
@@ -15,6 +16,7 @@ export const GlobalStyle = createGlobalStyle`
       background: ${({ theme }) => theme.background};
       color: ${({ theme }) => theme['base-title']};
       padding: 0 1rem;
+      -webkit-font-smoothing: antialiased;
    }
 
    a {
@@ -22,8 +24,7 @@ export const GlobalStyle = createGlobalStyle`
    }
    
    body, input, textarea, button{
-      /* font-family: 'Baloo 2', sans-serif; */
-      font-family: 'Roboto', sans-serif;  
+      ${textStyle.fonts.textS}
       font-size: 1.4rem;
       line-height: 130%;
       font-weight: 400;
