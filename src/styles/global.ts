@@ -17,6 +17,17 @@ export const GlobalStyle = createGlobalStyle`
       color: ${({ theme }) => theme['base-text']};
       padding: 0 1rem;
       -webkit-font-smoothing: antialiased;
+
+      &::-webkit-scrollbar {
+         width: .8rem;
+      }
+      &::-webkit-scrollbar-track {
+         background: transparent;
+      }
+      &::-webkit-scrollbar-thumb {
+         background: ${({ theme }) => theme.yellow};
+         border-radius: .8rem;
+      }
    }
 
    a {

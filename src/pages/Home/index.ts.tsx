@@ -1,12 +1,8 @@
 import {
-  AddCart,
   BannerContainer,
   HomeContainer,
   Info,
-  Operation,
-  Product,
   Products,
-  Tag,
   Titles,
 } from './styles'
 import {
@@ -14,9 +10,9 @@ import {
   Package,
   Timer,
   Coffee,
-  Plus,
-  Minus,
 } from '@phosphor-icons/react'
+import { coffees } from '../../../data.json'
+import { Product } from '../../components/Product'
 
 export function Home() {
   return (
@@ -58,38 +54,9 @@ export function Home() {
       <h2>Nossos cafés</h2>
 
       <Products>
-        <Product>
-          <img src="./products/expresso.png" alt="" />
-          <div className="tags">
-            <Tag>Tradicional</Tag>
-            <Tag>Com Leite</Tag>
-          </div>
-
-          <div className="description">
-            <h3>Expresso Tradicional</h3>
-            <p>O tradicional café feito com água quente e grãos moídos</p>
-          </div>
-          <Operation>
-            <div className="price">
-              R$
-              <span> 9,90</span>
-            </div>
-            <AddCart>
-              <div className="qtd">
-                <button>
-                  <Minus size={14} weight="bold" />
-                </button>
-                <span>1</span>
-                <button>
-                  <Plus size={14} weight="bold" />
-                </button>
-              </div>
-              <button className="shoppingCart">
-                <ShoppingCartSimple size={16} weight="fill" />
-              </button>
-            </AddCart>
-          </Operation>
-        </Product>
+        {coffees.map((coffee) => {
+          return <Product key={coffee.id} coffee={coffee} />
+        })}
       </Products>
     </HomeContainer>
   )
