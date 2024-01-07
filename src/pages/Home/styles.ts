@@ -81,25 +81,21 @@ export const Products = styled.div`
 export const Product = styled.div`
   flex: 0 0 25.6rem;
   background-color: ${({ theme }) => theme['base-card']};
-  padding: 0 20px;
+  padding: 0 20px 20px;
   border-radius: 6px 36px;
 
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
   gap: 12px;
 
   img {
     margin-top: -20px;
   }
 
-  .tag {
-    text-transform: uppercase;
-    color: ${({ theme }) => theme['yellow-dark']};
-    background-color: ${({ theme }) => theme['yellow-light']};
-    padding: 4px 8px;
-    border-radius: 20px;
+  .tags {
+    display: flex;
+    gap: 4px;
   }
 
   .description {
@@ -118,6 +114,13 @@ export const Product = styled.div`
     }
   }
 `
+export const Tag = styled.span`
+  text-transform: uppercase;
+  color: ${({ theme }) => theme['yellow-dark']};
+  background-color: ${({ theme }) => theme['yellow-light']};
+  padding: 4px 8px;
+  border-radius: 20px;
+`
 
 export const Operation = styled.div`
   width: 100%;
@@ -127,5 +130,50 @@ export const Operation = styled.div`
 
   .price span {
     ${textStyle.fonts.titleM}
+  }
+
+  button {
+    border: 0;
+    background-color: transparent;
+    cursor: pointer;
+  }
+`
+export const AddCart = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 8px;
+
+  .qtd {
+    padding: 8px;
+    background-color: ${({ theme }) => theme['base-button']};
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    svg {
+      color: ${({ theme }) => theme.purple};
+      transition: color 0.5s;
+
+      &:hover {
+        color: ${({ theme }) => theme['purple-dark']};
+      }
+    }
+  }
+
+  .shoppingCart {
+    padding: 8px;
+    background-color: ${({ theme }) => theme['purple-dark']};
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.5s;
+    svg {
+      color: ${({ theme }) => theme['base-card']};
+    }
+
+    &:hover {
+      background-color: ${({ theme }) => theme.purple};
+    }
   }
 `

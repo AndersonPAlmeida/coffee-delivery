@@ -1,13 +1,22 @@
 import {
+  AddCart,
   BannerContainer,
   HomeContainer,
   Info,
   Operation,
   Product,
   Products,
+  Tag,
   Titles,
 } from './styles'
-import { ShoppingCart, Package, Timer, Coffee } from '@phosphor-icons/react'
+import {
+  ShoppingCartSimple,
+  Package,
+  Timer,
+  Coffee,
+  Plus,
+  Minus,
+} from '@phosphor-icons/react'
 
 export function Home() {
   return (
@@ -24,7 +33,7 @@ export function Home() {
 
           <Info>
             <div className="tag one">
-              <ShoppingCart size={32} weight="fill" />
+              <ShoppingCartSimple size={32} weight="fill" />
               <span>Compra simples e segura</span>
             </div>
             <div className="tag two">
@@ -51,7 +60,10 @@ export function Home() {
       <Products>
         <Product>
           <img src="./products/expresso.png" alt="" />
-          <div className="tag">Tradicional</div>
+          <div className="tags">
+            <Tag>Tradicional</Tag>
+            <Tag>Com Leite</Tag>
+          </div>
 
           <div className="description">
             <h3>Expresso Tradicional</h3>
@@ -62,14 +74,20 @@ export function Home() {
               R$
               <span> 9,90</span>
             </div>
-            <div className="addCart">
+            <AddCart>
               <div className="qtd">
-                <span>-</span>
+                <button>
+                  <Minus size={14} weight="bold" />
+                </button>
                 <span>1</span>
-                <span>+</span>
+                <button>
+                  <Plus size={14} weight="bold" />
+                </button>
               </div>
-              <ShoppingCart />
-            </div>
+              <button className="shoppingCart">
+                <ShoppingCartSimple size={16} weight="fill" />
+              </button>
+            </AddCart>
           </Operation>
         </Product>
       </Products>
