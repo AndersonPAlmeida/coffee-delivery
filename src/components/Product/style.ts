@@ -69,23 +69,6 @@ export const AddCart = styled.div`
   align-items: center;
   gap: 8px;
 
-  .qtd {
-    padding: 8px;
-    background-color: ${({ theme }) => theme['base-button']};
-    border-radius: 6px;
-    display: flex;
-    align-items: center;
-    gap: 4px;
-    svg {
-      color: ${({ theme }) => theme.purple};
-      transition: color 0.5s;
-
-      &:hover {
-        color: ${({ theme }) => theme['purple-dark']};
-      }
-    }
-  }
-
   .shoppingCart {
     padding: 8px;
     background-color: ${({ theme }) => theme['purple-dark']};
