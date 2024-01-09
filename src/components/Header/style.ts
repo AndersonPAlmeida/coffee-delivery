@@ -1,7 +1,8 @@
 import styled from 'styled-components'
-import { textStyle } from '../../styles/textStyle'
+import { stylesStandard } from '../../styles/stylesStandard'
 
 export const HeaderContainer = styled.header`
+  ${stylesStandard.widthScreen.screenXG}
   padding: 3.2rem 0;
 
   display: flex;
@@ -55,6 +56,6 @@ export const CountShop = styled.span`
   top: -8px;
   right: -8px;
 
-  ${textStyle.fonts.textXS}
+  ${stylesStandard.fonts.textXS}
   letter-spacing: -0.72px;
 `

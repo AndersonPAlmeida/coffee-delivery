@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { textStyle } from '../../styles/textStyle'
+import { stylesStandard } from '../../styles/stylesStandard'
 
 export const ProductContainer = styled.div`
   flex: 0 0 25.6rem;
@@ -26,7 +26,7 @@ export const ProductContainer = styled.div`
     margin-bottom: 21px;
 
     h3 {
-      ${textStyle.fonts.titleS}
+      ${stylesStandard.fonts.titleS}
       color: ${({ theme }) => theme['base-subtitle']};
       margin-top: 4px;
       margin-bottom: 8px;
@@ -39,7 +39,7 @@ export const ProductContainer = styled.div`
 `
 
 export const Tag = styled.span`
-  ${textStyle.fonts.tag}
+  ${stylesStandard.fonts.tag}
   text-transform: uppercase;
   color: ${({ theme }) => theme['yellow-dark']};
   background-color: ${({ theme }) => theme['yellow-light']};
@@ -55,7 +55,7 @@ export const Operation = styled.div`
 
   .price span {
     margin-left: 5px;
-    ${textStyle.fonts.titleM}
+    ${stylesStandard.fonts.titleM}
   }
 
   button {

@@ -1,8 +1,10 @@
 import {
+  Banner,
   BannerContainer,
   HomeContainer,
   Info,
   Products,
+  Subtitle,
   Titles,
 } from './styles'
 import {
@@ -18,40 +20,42 @@ export function Home() {
   return (
     <HomeContainer>
       <BannerContainer>
-        <div>
-          <Titles>
-            <h1>Encontre o café perfeito para qualquer hora do dia</h1>
-            <span>
-              Com o Coffee Delivery você recebe seu café onde estiver, a
-              qualquer hora
-            </span>
-          </Titles>
+        <Banner>
+          <div>
+            <Titles>
+              <h1>Encontre o café perfeito para qualquer hora do dia</h1>
+              <span>
+                Com o Coffee Delivery você recebe seu café onde estiver, a
+                qualquer hora
+              </span>
+            </Titles>
 
-          <Info>
-            <div className="tag one">
-              <ShoppingCartSimple size={32} weight="fill" />
-              <span>Compra simples e segura</span>
-            </div>
-            <div className="tag two">
-              <Package size={32} weight="fill" />
-              <span>Embalagem mantém o café intacto</span>
-            </div>
-            <div className="tag three">
-              <Timer size={32} weight="fill" />
-              <span>Entrega rápida e rastreada</span>
-            </div>
-            <div className="tag four">
-              <Coffee size={32} weight="fill" />
-              <span>O café chega fresquinho até você</span>
-            </div>
-          </Info>
-        </div>
-        <div className="containerBanner">
-          <img src="./banner.svg" alt="" />
-        </div>
+            <Info>
+              <div className="tag one">
+                <ShoppingCartSimple size={32} weight="fill" />
+                <span>Compra simples e segura</span>
+              </div>
+              <div className="tag two">
+                <Package size={32} weight="fill" />
+                <span>Embalagem mantém o café intacto</span>
+              </div>
+              <div className="tag three">
+                <Timer size={32} weight="fill" />
+                <span>Entrega rápida e rastreada</span>
+              </div>
+              <div className="tag four">
+                <Coffee size={32} weight="fill" />
+                <span>O café chega fresquinho até você</span>
+              </div>
+            </Info>
+          </div>
+          <div className="containerBanner">
+            <img src="./banner.svg" alt="" />
+          </div>
+        </Banner>
       </BannerContainer>
 
-      <h2>Nossos cafés</h2>
+      <Subtitle>Nossos cafés</Subtitle>
 
       <Products>
         {coffees.map((coffee) => {

@@ -1,5 +1,5 @@
 import { createGlobalStyle } from 'styled-components'
-import { textStyle } from './textStyle'
+import { stylesStandard } from './stylesStandard'
 
 export const GlobalStyle = createGlobalStyle`
    * {
@@ -15,7 +15,6 @@ export const GlobalStyle = createGlobalStyle`
    body {
       background: ${({ theme }) => theme.background};
       color: ${({ theme }) => theme['base-text']};
-      padding: 0 1rem;
       -webkit-font-smoothing: antialiased;
 
       &::-webkit-scrollbar {
@@ -35,7 +34,7 @@ export const GlobalStyle = createGlobalStyle`
    }
    
    body, input, textarea, button{
-      ${textStyle.fonts.textS}
+      ${stylesStandard.fonts.textS}
       font-size: 1.4rem;
       line-height: 130%;
       font-weight: 400;

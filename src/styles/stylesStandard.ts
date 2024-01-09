@@ -1,6 +1,6 @@
 import { css } from 'styled-components'
 
-export const textStyle = {
+export const stylesStandard = {
   fonts: {
     titleXL: css`
       font-family: 'Baloo 2', sans-serif;
@@ -84,6 +84,12 @@ export const textStyle = {
       font-size: 1.2rem;
       line-height: 160%;
       font-weight: 400;
+    `,
+  },
+  widthScreen: {
+    screenXG: css`
+      width: 112rem;
+      margin: 0 auto;
     `,
   },
 }
