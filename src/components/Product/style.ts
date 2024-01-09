@@ -76,7 +76,7 @@ export const AddCart = styled.div`
     display: flex;
     align-items: center;
     justify-content: center;
-    transition: background 0.5s;
+    transition: background-color 0.5s;
     svg {
       color: ${({ theme }) => theme['base-card']};
     }

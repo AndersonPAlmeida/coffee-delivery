@@ -1,8 +1,9 @@
 import { ShoppingCartSimple } from '@phosphor-icons/react'
 import { QuantityInput } from '../QuantityInput'
 import { AddCart, Operation, ProductContainer, Tag } from './style'
+import { useState } from 'react'
 
-type Props = {
+interface Props {
   coffee: {
     id: string
     name: string
@@ -14,6 +15,19 @@ type Props = {
 }
 
 export function Product({ coffee }: Props) {
+  const [quantity, setQuantity] = useState(1)
+  const testQauantity = quantity === 1
+
+  function incrementQuantity() {
+    setQuantity((state) => state + 1)
+  }
+
+  function decrementQuantity() {
+    if (quantity > 1) {
+      setQuantity((state) => state - 1)
+    }
+  }
+
   return (
     <ProductContainer>
       <img src={coffee.image} alt="" />
@@ -33,9 +47,14 @@ export function Product({ coffee }: Props) {
           <span>{coffee.price.toFixed(2)}</span>
         </div>
         <AddCart>
-          <QuantityInput />
+          <QuantityInput
+            quantity={quantity}
+            incrementQuantity={incrementQuantity}
+            decrementQuantity={decrementQuantity}
+            disabled={testQauantity}
+          />
           <button className="shoppingCart">
-            <ShoppingCartSimple size={16} weight="fill" />
+            <ShoppingCartSimple size={20} weight="fill" />
           </button>
         </AddCart>
       </Operation>
