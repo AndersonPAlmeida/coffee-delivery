@@ -1,7 +1,8 @@
 import { ShoppingCartSimple } from '@phosphor-icons/react'
 import { QuantityInput } from '../QuantityInput'
 import { AddCart, Operation, ProductContainer, Tag } from './style'
-import { useState } from 'react'
+import { useContext, useState } from 'react'
+import { CartContext } from '../../contexts/CartContext'
 
 interface Props {
   coffee: {
@@ -15,8 +16,9 @@ interface Props {
 }
 
 export function Product({ coffee }: Props) {
+  const { addOrder } = useContext(CartContext)
   const [quantity, setQuantity] = useState(1)
-  const testQauantity = quantity === 1
+  const testQuantity = quantity === 1
 
   function incrementQuantity() {
     setQuantity((state) => state + 1)
@@ -26,6 +28,18 @@ export function Product({ coffee }: Props) {
     if (quantity > 1) {
       setQuantity((state) => state - 1)
     }
+  }
+
+  function haddleAddCart() {
+    const order = {
+      coffeeId: coffee.id,
+      quantity,
+      price: coffee.price,
+    }
+
+    addOrder(order)
+
+    setQuantity(1)
   }
 
   return (
@@ -51,9 +65,9 @@ export function Product({ coffee }: Props) {
             quantity={quantity}
             incrementQuantity={incrementQuantity}
             decrementQuantity={decrementQuantity}
-            disabled={testQauantity}
+            disabled={testQuantity}
           />
-          <button className="shoppingCart">
+          <button className="shoppingCart" onClick={haddleAddCart}>
             <ShoppingCartSimple size={20} weight="fill" />
           </button>
         </AddCart>

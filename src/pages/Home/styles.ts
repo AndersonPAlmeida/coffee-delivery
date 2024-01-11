@@ -1,6 +1,7 @@
 import { stylesStandard } from '../../styles/stylesStandard'
 import styled from 'styled-components'
-import backgroudBanner from '../../../public/backgroundBanner.svg'
+// eslint-disable-next-line import/no-absolute-path
+import backgroudBanner from '/backgroundBanner.svg'
 
 export const HomeContainer = styled.div`
   display: flex;

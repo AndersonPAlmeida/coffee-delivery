@@ -1,3 +1,7 @@
+import { useContext } from 'react'
+import { CartContext } from '../contexts/CartContext'
+
 export function Checkout() {
-  return <h1>Checkout</h1>
+  const { order } = useContext(CartContext)
+  return <pre>{JSON.stringify(order)}</pre>
 }
