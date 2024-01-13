@@ -16,9 +16,9 @@ interface Props {
 }
 
 export function Product({ coffee }: Props) {
-  const { addOrder } = useContext(CartContext)
+  const { addItemCart } = useContext(CartContext)
   const [quantity, setQuantity] = useState(1)
-  const testQuantity = quantity === 1
+  const isQuantityEqualToOne = quantity === 1
 
   function incrementQuantity() {
     setQuantity((state) => state + 1)
@@ -37,7 +37,7 @@ export function Product({ coffee }: Props) {
       price: coffee.price,
     }
 
-    addOrder(order)
+    addItemCart(order)
 
     setQuantity(1)
   }
@@ -65,7 +65,7 @@ export function Product({ coffee }: Props) {
             quantity={quantity}
             incrementQuantity={incrementQuantity}
             decrementQuantity={decrementQuantity}
-            disabled={testQuantity}
+            disabled={isQuantityEqualToOne}
           />
           <button className="shoppingCart" onClick={haddleAddCart}>
             <ShoppingCartSimple size={20} weight="fill" />

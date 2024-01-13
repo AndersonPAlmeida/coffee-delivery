@@ -11,24 +11,24 @@ interface Cart {
 }
 
 interface ShoppingCartContextType {
-  order: Cart[]
-  addOrder: (newOrder: Cart) => void
+  cart: Cart[]
+  addItemCart: (addItem: Cart) => void
 }
 
 export const CartContext = createContext({} as ShoppingCartContextType)
 
 export function CartContextProvider({ children }: ShoppingCartProps) {
-  const [order, setOrder] = useState<Cart[]>([])
+  const [cart, setCart] = useState<Cart[]>([])
 
-  function addOrder(newOrder: Cart) {
-    setOrder((state) => [...state, newOrder])
+  function addItemCart(addItem: Cart) {
+    setCart((state) => [...state, addItem])
   }
 
   return (
     <CartContext.Provider
       value={{
-        order,
-        addOrder,
+        cart,
+        addItemCart,
       }}
     >
       {children}

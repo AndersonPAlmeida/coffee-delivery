@@ -6,8 +6,8 @@ import { useContext } from 'react'
 import { CartContext } from '../../contexts/CartContext'
 
 export function Header() {
-  const { order } = useContext(CartContext)
-  const cartLength = order.length
+  const { cart } = useContext(CartContext)
+  const isCartGreatherThanZero = cart.length
 
   return (
     <HeaderContainer>
@@ -22,7 +22,9 @@ export function Header() {
         </button>
         <NavLink to="/checkout">
           <ShoppingCartSimple size={22} weight="fill" />
-          {cartLength > 0 && <CountShop>{cartLength}</CountShop>}
+          {isCartGreatherThanZero > 0 && (
+            <CountShop>{isCartGreatherThanZero}</CountShop>
+          )}
         </NavLink>
       </nav>
     </HeaderContainer>
