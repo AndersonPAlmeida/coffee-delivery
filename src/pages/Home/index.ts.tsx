@@ -14,7 +14,7 @@ import {
   Coffee,
 } from '@phosphor-icons/react'
 import { coffees } from '../../../data.json'
-import { Product } from '../../components/Product'
+import { Product } from './Components/Product'
 
 export function Home() {
   return (

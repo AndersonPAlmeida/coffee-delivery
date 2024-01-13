@@ -1,8 +1,8 @@
 import { ShoppingCartSimple } from '@phosphor-icons/react'
-import { QuantityInput } from '../QuantityInput'
+import { QuantityInput } from '../../../../components/Forms/QuantityInput'
 import { AddCart, Operation, ProductContainer, Tag } from './style'
 import { useContext, useState } from 'react'
-import { CartContext } from '../../contexts/CartContext'
+import { CartContext } from '../../../../contexts/CartContext'
 
 interface Props {
   coffee: {

@@ -12,9 +12,13 @@ export const GlobalStyle = createGlobalStyle`
       font-size: 62.5%;
    }
 
+   body, input, textarea, button{
+      ${stylesStandard.fonts.textS}
+   }
+
    body {
-      background: ${({ theme }) => theme.background};
       color: ${({ theme }) => theme['base-text']};
+      background: ${({ theme }) => theme.background};
       -webkit-font-smoothing: antialiased;
 
       &::-webkit-scrollbar {
@@ -31,10 +35,6 @@ export const GlobalStyle = createGlobalStyle`
 
    a {
       text-decoration: none;
-   }
-   
-   body, input, textarea, button{
-      ${stylesStandard.fonts.textS}
    }
 
    button {
