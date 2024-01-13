@@ -5,7 +5,7 @@ export const CheckoutContainer = styled.div`
   ${stylesStandard.widthScreen.screenXG}
   display: grid;
   grid-template-columns: 1fr 44.8rem;
-  gap: 3.2rem;
+  gap: 1.5rem 3.2rem;
 `
 
 export const AddressAndTypePayment = styled.div`
@@ -22,4 +22,9 @@ export const ItemsAndPayments = styled.div`
   flex-direction: column;
   gap: 2.4rem;
   background-color: ${({ theme }) => theme['base-card']};
+`
+
+export const Title = styled.h2`
+  ${stylesStandard.fonts.titleXS}
+  color: ${({ theme }) => theme['base-subtitle']};
 `

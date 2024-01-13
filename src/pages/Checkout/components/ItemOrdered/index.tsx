@@ -24,7 +24,7 @@ export function ItemOrdered() {
               <QuantityInput quantity={1} />
               <ButtonRemove>
                 <Trash size={16} />
-                REMOVER
+                Remover
               </ButtonRemove>
             </Operations>
           </div>

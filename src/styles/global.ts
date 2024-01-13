@@ -35,9 +35,6 @@ export const GlobalStyle = createGlobalStyle`
    
    body, input, textarea, button{
       ${stylesStandard.fonts.textS}
-      font-size: 1.4rem;
-      line-height: 130%;
-      font-weight: 400;
    }
 
    button {

@@ -5,6 +5,7 @@ import {
   AddressAndTypePayment,
   CheckoutContainer,
   ItemsAndPayments,
+  Title,
 } from './style'
 
 export function Checkout() {
@@ -12,6 +13,8 @@ export function Checkout() {
 
   return (
     <CheckoutContainer>
+      <Title>Complete seu pedido</Title>
+      <Title>Cafés selecionados</Title>
       <AddressAndTypePayment></AddressAndTypePayment>
       <ItemsAndPayments>
         <ItemOrdered />
