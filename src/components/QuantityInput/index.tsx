@@ -7,8 +7,8 @@ interface Props
     HTMLButtonElement
   > {
   quantity: number
-  incrementQuantity: () => void
-  decrementQuantity: () => void
+  incrementQuantity?: () => void
+  decrementQuantity?: () => void
 }
 
 export function QuantityInput({

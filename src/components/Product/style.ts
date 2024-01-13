@@ -57,12 +57,6 @@ export const Operation = styled.div`
     margin-left: 5px;
     ${stylesStandard.fonts.titleM}
   }
-
-  button {
-    border: 0;
-    background-color: transparent;
-    cursor: pointer;
-  }
 `
 export const AddCart = styled.div`
   display: flex;

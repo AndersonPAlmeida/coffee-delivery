@@ -39,4 +39,10 @@ export const GlobalStyle = createGlobalStyle`
       line-height: 130%;
       font-weight: 400;
    }
+
+   button {
+      border: 0;
+      background-color: transparent;
+      cursor: pointer;
+   }
 `
