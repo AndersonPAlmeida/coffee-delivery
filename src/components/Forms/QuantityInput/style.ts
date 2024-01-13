@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { stylesStandard } from '../../styles/stylesStandard'
+import { stylesStandard } from '../../../styles/stylesStandard'
 
 export const QuantityContainer = styled.div`
   display: flex;
