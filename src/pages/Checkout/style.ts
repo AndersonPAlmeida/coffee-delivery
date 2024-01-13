@@ -9,9 +9,9 @@ export const CheckoutContainer = styled.div`
 `
 
 export const AddressAndTypePayment = styled.div`
-  width: 100%;
-  height: 40px;
-  background-color: goldenrod;
+  padding: 4rem;
+  border-radius: 6px;
+  background-color: ${({ theme }) => theme['base-card']};
 `
 
 export const ItemsAndPayments = styled.div`
@@ -27,4 +27,41 @@ export const ItemsAndPayments = styled.div`
 export const Title = styled.h2`
   ${stylesStandard.fonts.titleXS}
   color: ${({ theme }) => theme['base-subtitle']};
+`
+
+export const Price = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+`
+
+export const Information = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+
+  &:last-child {
+    text-align: end;
+  }
+`
+
+export const ButtonConfirm = styled.button`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 6px;
+
+  transition: all 0.3s;
+  text-transform: uppercase;
+
+  background-color: ${({ theme }) => theme.yellow};
+  padding: 12px 8px;
+  width: 100%;
+
+  ${stylesStandard.fonts.buttonG}
+  color: ${({ theme }) => theme.white};
+  &:hover {
+    background-color: ${({ theme }) => theme['yellow-dark']};
+  }
 `
