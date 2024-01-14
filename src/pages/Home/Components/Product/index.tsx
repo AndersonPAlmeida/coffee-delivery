@@ -35,6 +35,8 @@ export function Product({ coffee }: Props) {
       coffeeId: coffee.id,
       quantity,
       price: coffee.price,
+      name: coffee.name,
+      img: coffee.image,
     }
 
     addCoffeeCart(order)

@@ -8,17 +8,24 @@ import {
   ItemOrderedContainer,
   Separator,
 } from './style'
+import { Cart } from '../../../../contexts/CartContext'
 
-export function ItemOrdered() {
+interface Props {
+  cartIten: Cart
+}
+
+export function ItemOrdered({
+  cartIten: { img, name, quantity, price },
+}: Props) {
   return (
     <ItemOrderedContainer>
       <Item>
         <Description>
-          <img src="/products/arabe.png" alt="" />
+          <img src={img} alt={name} />
           <div>
-            Expresso Tradicional
+            {name}
             <Operations>
-              <QuantityInput quantity={1} />
+              <QuantityInput quantity={quantity} />
               <ButtonRemove>
                 <Trash size={16} />
                 Remover
@@ -26,7 +33,7 @@ export function ItemOrdered() {
             </Operations>
           </div>
         </Description>
-        <span>R$ 9,90</span>
+        <span>R$ {(price * quantity).toFixed(2)}</span>
       </Item>
 
       <Separator />

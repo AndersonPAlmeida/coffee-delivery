@@ -6,6 +6,8 @@ interface ShoppingCartProps {
 
 export interface Cart {
   coffeeId: string
+  name: string
+  img: string
   quantity: number
   price: number
 }

@@ -1,5 +1,5 @@
-// import { useContext } from 'react'
-// import { CartContext } from '../../contexts/CartContext'
+import { useContext } from 'react'
+import { CartContext } from '../../contexts/CartContext'
 import {
   Bank,
   CreditCard,
@@ -28,7 +28,12 @@ import { FieldInput } from '../../components/Forms/InputField'
 import { RadioField } from '../../components/Forms/RadioField'
 
 export function Checkout() {
-  // const { cart } = useContext(CartContext)
+  const { cart } = useContext(CartContext)
+  const valueTotalPurchase = cart.reduce((valuePurchase, cartItem) => {
+    return cartItem.price * cartItem.quantity + valuePurchase
+  }, 0)
+  const freight = 3.5
+  const valueTotalPurchaseAndFreight = valueTotalPurchase + freight
 
   return (
     <CheckoutContainer>
@@ -112,7 +117,9 @@ export function Checkout() {
       </AddressAndTypePayment>
 
       <ItemsAndPayments>
-        <ItemOrdered />
+        {cart.map((itemCoffee) => (
+          <ItemOrdered key={itemCoffee.coffeeId} cartIten={itemCoffee} />
+        ))}
 
         <Price>
           <Information>
@@ -121,9 +128,9 @@ export function Checkout() {
             <h3>Total</h3>
           </Information>
           <Information>
-            <p>R$ 29,70</p>
-            <p>R$ 3,50</p>
-            <h3>R$ 33,20</h3>
+            <p>R$ {valueTotalPurchase.toFixed(2)}</p>
+            <p>R$ {freight.toFixed(2)}</p>
+            <h3>R$ {valueTotalPurchaseAndFreight.toFixed(2)}</h3>
           </Information>
         </Price>
 
