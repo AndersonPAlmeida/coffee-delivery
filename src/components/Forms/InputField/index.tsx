@@ -1,11 +1,20 @@
-import { HTMLAttributes, InputHTMLAttributes, useState } from 'react'
+import {
+  HTMLAttributes,
+  InputHTMLAttributes,
+  LegacyRef,
+  forwardRef,
+  useState,
+} from 'react'
 import { InputContainer, InputField, InputWrapper } from './style'
 
 type PropsInput = InputHTMLAttributes<HTMLInputElement> & {
   containerProps?: HTMLAttributes<HTMLDivElement>
   optional?: boolean
 }
-export function FieldInput({ containerProps, optional, ...rest }: PropsInput) {
+export const FieldInput = forwardRef(function FieldInput(
+  { containerProps, optional, ...rest }: PropsInput,
+  ref: LegacyRef<HTMLInputElement>,
+) {
   const [isInputFocused, setIsInputFocused] = useState(false)
 
   function handleFocus() {
@@ -19,9 +28,14 @@ export function FieldInput({ containerProps, optional, ...rest }: PropsInput) {
   return (
     <InputContainer {...containerProps}>
       <InputWrapper data-state={isInputFocused ? 'focused' : 'blurred'}>
-        <InputField onFocus={handleFocus} onBlur={handleBlur} {...rest} />
+        <InputField
+          onFocus={handleFocus}
+          onBlur={handleBlur}
+          ref={ref}
+          {...rest}
+        />
         {optional ? <span>Opcional</span> : null}
       </InputWrapper>
     </InputContainer>
   )
-}
+})

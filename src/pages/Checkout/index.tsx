@@ -7,7 +7,12 @@ import {
   MapPinLine,
   Money,
 } from '@phosphor-icons/react'
+import { useForm } from 'react-hook-form'
+// import { zodResolver } from '@hookform/resolvers/zod'
+// import * as zod from 'zod'
 import { ItemOrdered } from './components/ItemOrdered'
+import { FieldInput } from '../../components/Forms/InputField'
+import { RadioField } from '../../components/Forms/RadioField'
 import {
   Address,
   AddressAndTypePayment,
@@ -24,19 +29,21 @@ import {
   Title,
   TypePayment,
 } from './style'
-import { FieldInput } from '../../components/Forms/InputField'
-import { RadioField } from '../../components/Forms/RadioField'
 
 export function Checkout() {
   const { cart } = useContext(CartContext)
+  const { register, handleSubmit } = useForm()
   const valueTotalPurchase = cart.reduce((valuePurchase, cartItem) => {
     return cartItem.price * cartItem.quantity + valuePurchase
   }, 0)
   const freight = 3.5
   const valueTotalPurchaseAndFreight = valueTotalPurchase + freight
 
+  function handleNewPurchase(data: any) {
+    console.log(data)
+  }
   return (
-    <CheckoutContainer>
+    <CheckoutContainer onSubmit={handleSubmit(handleNewPurchase)}>
       <Title>Complete seu pedido</Title>
       <Title>Cafés selecionados</Title>
 
@@ -55,37 +62,51 @@ export function Checkout() {
               containerProps={{ style: { gridArea: 'cep' } }}
               type="number"
               placeholder="CEP"
+              id="cep"
+              {...register('cep', { valueAsNumber: true })}
             />
             <FieldInput
               containerProps={{ style: { gridArea: 'street' } }}
               type="text"
               placeholder="Rua"
+              id="street"
+              {...register('street')}
             />
             <FieldInput
               containerProps={{ style: { gridArea: 'number' } }}
               type="text"
               placeholder="Número"
+              id="number"
+              {...register('number')}
             />
             <FieldInput
               containerProps={{ style: { gridArea: 'complement' } }}
               optional
               type="text"
               placeholder="Complemento"
+              id="complement"
+              {...register('complement')}
             />
             <FieldInput
               containerProps={{ style: { gridArea: 'district' } }}
               type="text"
               placeholder="Bairro"
+              id="district"
+              {...register('district')}
             />
             <FieldInput
               containerProps={{ style: { gridArea: 'city' } }}
               type="text"
               placeholder="Cidade"
+              id="city"
+              {...register('city')}
             />
             <FieldInput
               containerProps={{ style: { gridArea: 'uf' } }}
               type="text"
               placeholder="UF"
+              id="uf"
+              {...register('uf')}
             />
           </FieldInputContainer>
         </Address>
@@ -134,7 +155,7 @@ export function Checkout() {
           </Information>
         </Price>
 
-        <ButtonConfirm>Confirmar Pedido</ButtonConfirm>
+        <ButtonConfirm type="submit">Confirmar Pedido</ButtonConfirm>
       </ItemsAndPayments>
     </CheckoutContainer>
   )

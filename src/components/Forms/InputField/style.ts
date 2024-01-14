@@ -37,4 +37,10 @@ export const InputField = styled.input`
   &::placeholder {
     color: ${({ theme }) => theme['base-label']};
   }
+
+  &::-webkit-inner-spin-button,
+  &::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    -moz-appearance: textfield;
+  }
 `

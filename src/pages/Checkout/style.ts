@@ -27,7 +27,7 @@ export const Subtitle = styled.div`
   }
 `
 
-export const CheckoutContainer = styled.div`
+export const CheckoutContainer = styled.form`
   ${stylesStandard.widthScreen.screenXG}
   display: grid;
   grid-template-columns: 1fr 44.8rem;
