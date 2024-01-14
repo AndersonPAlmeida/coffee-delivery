@@ -1,13 +1,16 @@
-import { InputHTMLAttributes } from 'react'
+import { InputHTMLAttributes, LegacyRef, forwardRef } from 'react'
 import { InputRadioContainer, TypePayment } from './style'
 
 type PropsInput = InputHTMLAttributes<HTMLInputElement> /* & {} */
 
-export function RadioField({ children, ...rest }: PropsInput) {
+export const RadioField = forwardRef(function RadioField(
+  { children, ...rest }: PropsInput,
+  ref: LegacyRef<HTMLInputElement>,
+) {
   return (
     <InputRadioContainer>
-      <input type="radio" {...rest} />
+      <input type="radio" ref={ref} {...rest} />
       <TypePayment>{children}</TypePayment>
     </InputRadioContainer>
   )
-}
+})

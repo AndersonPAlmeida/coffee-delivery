@@ -8,8 +8,8 @@ import {
   Money,
 } from '@phosphor-icons/react'
 import { useForm } from 'react-hook-form'
-// import { zodResolver } from '@hookform/resolvers/zod'
-// import * as zod from 'zod'
+import { zodResolver } from '@hookform/resolvers/zod'
+import * as zod from 'zod'
 import { ItemOrdered } from './components/ItemOrdered'
 import { FieldInput } from '../../components/Forms/InputField'
 import { RadioField } from '../../components/Forms/RadioField'
@@ -30,18 +30,39 @@ import {
   TypePayment,
 } from './style'
 
+const newFormPurchaseValidationSchema = zod.object({
+  cep: zod.number({ invalid_type_error: 'Informe o cep' }),
+  street: zod.string().min(1, 'Informe a rua'),
+  number: zod.string().min(1, 'Informe o número'),
+  district: zod.string().min(1, 'Informe o bairro'),
+  complement: zod.string(),
+  city: zod.string().min(1, 'Informe a cidade'),
+  uf: zod.string().min(1, 'Informe a UF').max(2, 'A UF só recebe duas letras'),
+  paymentMethod: zod.enum(['credit', 'debit', 'cash'], {
+    invalid_type_error: 'Informe um método de pagamento',
+  }),
+})
+
+type FormPurchase = zod.infer<typeof newFormPurchaseValidationSchema>
+
 export function Checkout() {
   const { cart } = useContext(CartContext)
-  const { register, handleSubmit } = useForm()
+  const { register, handleSubmit /* formState */ } = useForm<FormPurchase>({
+    resolver: zodResolver(newFormPurchaseValidationSchema),
+  })
+
+  // console.log(formState.errors)
+
   const valueTotalPurchase = cart.reduce((valuePurchase, cartItem) => {
     return cartItem.price * cartItem.quantity + valuePurchase
   }, 0)
   const freight = 3.5
   const valueTotalPurchaseAndFreight = valueTotalPurchase + freight
 
-  function handleNewPurchase(data: any) {
+  function handleNewPurchase(data: FormPurchase) {
     console.log(data)
   }
+
   return (
     <CheckoutContainer onSubmit={handleSubmit(handleNewPurchase)}>
       <Title>Complete seu pedido</Title>
@@ -121,15 +142,30 @@ export function Checkout() {
           </DescriptionPayment>
 
           <FieldRadioContainer>
-            <RadioField type="radio" name="paymentMethod" value="credit">
+            <RadioField
+              type="radio"
+              value="credit"
+              id="credit"
+              {...register('paymentMethod')}
+            >
               <CreditCard size={16} />
               <span>Cartão de Crédito</span>
             </RadioField>
-            <RadioField type="radio" name="paymentMethod" value="debit">
+            <RadioField
+              type="radio"
+              value="debit"
+              id="debit"
+              {...register('paymentMethod')}
+            >
               <Bank size={16} />
               <span>Cartão de Débito</span>
             </RadioField>
-            <RadioField type="radio" name="paymentMethod" value="cash">
+            <RadioField
+              type="radio"
+              value="cash"
+              id="cash"
+              {...register('paymentMethod')}
+            >
               <Money size={16} />
               <span>Dinheiro</span>
             </RadioField>
