@@ -1,19 +1,6 @@
 import styled from 'styled-components'
 import { stylesStandard } from '../../styles/stylesStandard'
 
-export const CheckoutContainer = styled.div`
-  ${stylesStandard.widthScreen.screenXG}
-  display: grid;
-  grid-template-columns: 1fr 44.8rem;
-  gap: 1.5rem 3.2rem;
-`
-
-export const AddressAndTypePayment = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 1.2rem;
-`
-
 const Container = styled.div`
   display: flex;
   flex-direction: column;
@@ -23,9 +10,7 @@ const Container = styled.div`
   background-color: ${({ theme }) => theme['base-card']};
 `
 
-export const Address = styled(Container)``
-
-export const DescriptionAdrress = styled.div`
+const Description = styled.div`
   display: flex;
   gap: 8px;
   align-items: flex-start;
@@ -42,7 +27,28 @@ export const Subtitle = styled.div`
   }
 `
 
-export const FormContainer = styled.div`
+export const CheckoutContainer = styled.div`
+  ${stylesStandard.widthScreen.screenXG}
+  display: grid;
+  grid-template-columns: 1fr 44.8rem;
+  gap: 1.5rem 3.2rem;
+`
+
+export const AddressAndTypePayment = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+`
+
+export const Address = styled(Container)``
+
+export const DescriptionAddress = styled(Description)`
+  svg {
+    color: ${({ theme }) => theme['yellow-dark']};
+  }
+`
+
+export const FieldInputContainer = styled.div`
   display: grid;
   // eslint-disable-next-line prettier/prettier
   grid-template-areas:
@@ -56,7 +62,20 @@ export const FormContainer = styled.div`
 
 export const TypePayment = styled(Container)``
 
+export const DescriptionPayment = styled(Description)`
+  svg {
+    color: ${({ theme }) => theme.purple};
+  }
+`
+
+export const FieldRadioContainer = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 12px;
+`
+
 export const ItemsAndPayments = styled.div`
+  height: min-content;
   padding: 4rem;
   border-radius: 6px 44px;
 

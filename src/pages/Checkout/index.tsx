@@ -1,14 +1,22 @@
 // import { useContext } from 'react'
 // import { CartContext } from '../../contexts/CartContext'
-import { MapPinLine } from '@phosphor-icons/react'
+import {
+  Bank,
+  CreditCard,
+  CurrencyDollar,
+  MapPinLine,
+  Money,
+} from '@phosphor-icons/react'
 import { ItemOrdered } from './components/ItemOrdered'
 import {
   Address,
   AddressAndTypePayment,
   ButtonConfirm,
   CheckoutContainer,
-  DescriptionAdrress,
-  FormContainer,
+  DescriptionAddress,
+  DescriptionPayment,
+  FieldInputContainer,
+  FieldRadioContainer,
   Information,
   ItemsAndPayments,
   Price,
@@ -16,7 +24,8 @@ import {
   Title,
   TypePayment,
 } from './style'
-import { InputText } from '../../components/Forms/InputField'
+import { FieldInput } from '../../components/Forms/InputField'
+import { RadioField } from '../../components/Forms/RadioField'
 
 export function Checkout() {
   // const { cart } = useContext(CartContext)
@@ -28,54 +37,78 @@ export function Checkout() {
 
       <AddressAndTypePayment>
         <Address>
-          <DescriptionAdrress>
+          <DescriptionAddress>
             <MapPinLine size={22} />
             <Subtitle>
               <p>Endereço de Entrega</p>
               Informe o endereço onde deseja receber seu pedido
             </Subtitle>
-          </DescriptionAdrress>
+          </DescriptionAddress>
 
-          <FormContainer>
-            <InputText
+          <FieldInputContainer>
+            <FieldInput
               containerProps={{ style: { gridArea: 'cep' } }}
               type="number"
               placeholder="CEP"
             />
-            <InputText
+            <FieldInput
               containerProps={{ style: { gridArea: 'street' } }}
               type="text"
               placeholder="Rua"
             />
-            <InputText
+            <FieldInput
               containerProps={{ style: { gridArea: 'number' } }}
               type="text"
               placeholder="Número"
             />
-            <InputText
+            <FieldInput
               containerProps={{ style: { gridArea: 'complement' } }}
               optional
               type="text"
               placeholder="Complemento"
             />
-            <InputText
+            <FieldInput
               containerProps={{ style: { gridArea: 'district' } }}
               type="text"
               placeholder="Bairro"
             />
-            <InputText
+            <FieldInput
               containerProps={{ style: { gridArea: 'city' } }}
               type="text"
               placeholder="Cidade"
             />
-            <InputText
+            <FieldInput
               containerProps={{ style: { gridArea: 'uf' } }}
               type="text"
               placeholder="UF"
             />
-          </FormContainer>
+          </FieldInputContainer>
         </Address>
-        <TypePayment></TypePayment>
+
+        <TypePayment>
+          <DescriptionPayment>
+            <CurrencyDollar size={22} />
+            <Subtitle>
+              <p>Pagamento</p>O pagamento é feito na entrega. Escolha a forma
+              que deseja pagar
+            </Subtitle>
+          </DescriptionPayment>
+
+          <FieldRadioContainer>
+            <RadioField type="radio" name="paymentMethod" value="credit">
+              <CreditCard size={16} />
+              <span>Cartão de Crédito</span>
+            </RadioField>
+            <RadioField type="radio" name="paymentMethod" value="debit">
+              <Bank size={16} />
+              <span>Cartão de Débito</span>
+            </RadioField>
+            <RadioField type="radio" name="paymentMethod" value="cash">
+              <Money size={16} />
+              <span>Dinheiro</span>
+            </RadioField>
+          </FieldRadioContainer>
+        </TypePayment>
       </AddressAndTypePayment>
 
       <ItemsAndPayments>

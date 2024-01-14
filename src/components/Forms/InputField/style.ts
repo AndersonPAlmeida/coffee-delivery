@@ -30,7 +30,6 @@ export const InputWrapper = styled.label`
 
 export const InputField = styled.input`
   width: 100%;
-  height: 100%;
   border-radius: 4px;
   background-color: transparent;
   padding: 12px;

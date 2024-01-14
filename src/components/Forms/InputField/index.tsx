@@ -5,7 +5,7 @@ type PropsInput = InputHTMLAttributes<HTMLInputElement> & {
   containerProps?: HTMLAttributes<HTMLDivElement>
   optional?: boolean
 }
-export function InputText({ containerProps, optional, ...rest }: PropsInput) {
+export function FieldInput({ containerProps, optional, ...rest }: PropsInput) {
   const [isInputFocused, setIsInputFocused] = useState(false)
 
   function handleFocus() {
