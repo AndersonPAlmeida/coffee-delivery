@@ -1,5 +1,4 @@
 import {
-  FocusEvent,
   HTMLAttributes,
   InputHTMLAttributes,
   LegacyRef,
@@ -13,19 +12,17 @@ type PropsInput = InputHTMLAttributes<HTMLInputElement> & {
   optional?: boolean
 }
 export const FieldInput = forwardRef(function FieldInput(
-  { containerProps, optional, onFocus, onBlur, ...rest }: PropsInput,
+  { containerProps, optional, ...rest }: PropsInput,
   ref: LegacyRef<HTMLInputElement>,
 ) {
   const [isInputFocused, setIsInputFocused] = useState(false)
 
-  function handleFocus(event: FocusEvent<HTMLInputElement, Element>) {
+  function handleFocus() {
     setIsInputFocused(true)
-    onFocus?.(event)
   }
 
-  function handleBlur(event: FocusEvent<HTMLInputElement, Element>) {
+  function handleBlur() {
     setIsInputFocused(false)
-    onBlur?.(event)
   }
 
   return (
