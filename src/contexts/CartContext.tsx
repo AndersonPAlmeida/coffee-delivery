@@ -4,15 +4,16 @@ interface ShoppingCartProps {
   children: ReactNode
 }
 
-interface Cart {
+export interface Cart {
   coffeeId: string
   quantity: number
   price: number
 }
 
 interface ShoppingCartContextType {
+  orderId?: string
   cart: Cart[]
-  addItemCart: (addItem: Cart) => void
+  addCoffeeCart: (addItem: Cart) => void
 }
 
 export const CartContext = createContext({} as ShoppingCartContextType)
@@ -20,15 +21,29 @@ export const CartContext = createContext({} as ShoppingCartContextType)
 export function CartContextProvider({ children }: ShoppingCartProps) {
   const [cart, setCart] = useState<Cart[]>([])
 
-  function addItemCart(addItem: Cart) {
-    setCart((state) => [...state, addItem])
+  function addCoffeeCart(addItem: Cart) {
+    const coffeAlreadyExistInCart = cart.findIndex(
+      (cartCoffee) => cartCoffee.coffeeId === addItem.coffeeId,
+    )
+
+    if (coffeAlreadyExistInCart < 0) {
+      setCart([...cart, addItem])
+    } else {
+      const updateCart = cart.map((coffee) => {
+        if (coffee.coffeeId === addItem.coffeeId) {
+          return { ...coffee, quantity: addItem.quantity + coffee.quantity }
+        }
+        return { ...coffee }
+      })
+      setCart(updateCart)
+    }
   }
 
   return (
     <CartContext.Provider
       value={{
         cart,
-        addItemCart,
+        addCoffeeCart,
       }}
     >
       {children}

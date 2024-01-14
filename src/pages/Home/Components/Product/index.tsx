@@ -2,7 +2,7 @@ import { ShoppingCartSimple } from '@phosphor-icons/react'
 import { QuantityInput } from '../../../../components/Forms/QuantityInput'
 import { AddCart, Operation, ProductContainer, Tag } from './style'
 import { useContext, useState } from 'react'
-import { CartContext } from '../../../../contexts/CartContext'
+import { Cart, CartContext } from '../../../../contexts/CartContext'
 
 interface Props {
   coffee: {
@@ -16,7 +16,7 @@ interface Props {
 }
 
 export function Product({ coffee }: Props) {
-  const { addItemCart } = useContext(CartContext)
+  const { addCoffeeCart } = useContext(CartContext)
   const [quantity, setQuantity] = useState(1)
   const isQuantityEqualToOne = quantity === 1
 
@@ -31,13 +31,13 @@ export function Product({ coffee }: Props) {
   }
 
   function haddleAddCart() {
-    const order = {
+    const order: Cart = {
       coffeeId: coffee.id,
       quantity,
       price: coffee.price,
     }
 
-    addItemCart(order)
+    addCoffeeCart(order)
 
     setQuantity(1)
   }
