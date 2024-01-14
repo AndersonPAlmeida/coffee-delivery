@@ -1,15 +1,22 @@
 // import { useContext } from 'react'
 // import { CartContext } from '../../contexts/CartContext'
+import { MapPinLine } from '@phosphor-icons/react'
 import { ItemOrdered } from './components/ItemOrdered'
 import {
+  Address,
   AddressAndTypePayment,
   ButtonConfirm,
   CheckoutContainer,
+  DescriptionAdrress,
+  FormContainer,
   Information,
   ItemsAndPayments,
   Price,
+  Subtitle,
   Title,
+  TypePayment,
 } from './style'
+import { InputText } from '../../components/Forms/InputField'
 
 export function Checkout() {
   // const { cart } = useContext(CartContext)
@@ -18,7 +25,59 @@ export function Checkout() {
     <CheckoutContainer>
       <Title>Complete seu pedido</Title>
       <Title>Cafés selecionados</Title>
-      <AddressAndTypePayment></AddressAndTypePayment>
+
+      <AddressAndTypePayment>
+        <Address>
+          <DescriptionAdrress>
+            <MapPinLine size={22} />
+            <Subtitle>
+              <p>Endereço de Entrega</p>
+              Informe o endereço onde deseja receber seu pedido
+            </Subtitle>
+          </DescriptionAdrress>
+
+          <FormContainer>
+            <InputText
+              containerProps={{ style: { gridArea: 'cep' } }}
+              type="number"
+              placeholder="CEP"
+            />
+            <InputText
+              containerProps={{ style: { gridArea: 'street' } }}
+              type="text"
+              placeholder="Rua"
+            />
+            <InputText
+              containerProps={{ style: { gridArea: 'number' } }}
+              type="text"
+              placeholder="Número"
+            />
+            <InputText
+              containerProps={{ style: { gridArea: 'complement' } }}
+              optional
+              type="text"
+              placeholder="Complemento"
+            />
+            <InputText
+              containerProps={{ style: { gridArea: 'district' } }}
+              type="text"
+              placeholder="Bairro"
+            />
+            <InputText
+              containerProps={{ style: { gridArea: 'city' } }}
+              type="text"
+              placeholder="Cidade"
+            />
+            <InputText
+              containerProps={{ style: { gridArea: 'uf' } }}
+              type="text"
+              placeholder="UF"
+            />
+          </FormContainer>
+        </Address>
+        <TypePayment></TypePayment>
+      </AddressAndTypePayment>
+
       <ItemsAndPayments>
         <ItemOrdered />
 

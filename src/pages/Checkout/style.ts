@@ -9,10 +9,52 @@ export const CheckoutContainer = styled.div`
 `
 
 export const AddressAndTypePayment = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+`
+
+const Container = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 3.2rem;
   padding: 4rem;
   border-radius: 6px;
   background-color: ${({ theme }) => theme['base-card']};
 `
+
+export const Address = styled(Container)``
+
+export const DescriptionAdrress = styled.div`
+  display: flex;
+  gap: 8px;
+  align-items: flex-start;
+
+  svg {
+    color: ${({ theme }) => theme['yellow-dark']};
+  }
+`
+
+export const Subtitle = styled.div`
+  p {
+    ${stylesStandard.fonts.textM}
+    color: ${({ theme }) => theme['base-subtitle']};
+  }
+`
+
+export const FormContainer = styled.div`
+  display: grid;
+  // eslint-disable-next-line prettier/prettier
+  grid-template-areas:
+    'cep . .'
+    'street street street'
+    'number complement complement'
+    'district city uf';
+  grid-template-columns: 20rem 1fr 6rem;
+  gap: 16px 12px;
+`
+
+export const TypePayment = styled(Container)``
 
 export const ItemsAndPayments = styled.div`
   padding: 4rem;

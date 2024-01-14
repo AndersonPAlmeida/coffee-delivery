@@ -14,10 +14,10 @@ export const GlobalStyle = createGlobalStyle`
 
    body, input, textarea, button{
       ${stylesStandard.fonts.textS}
+      color: ${({ theme }) => theme['base-text']};
    }
 
    body {
-      color: ${({ theme }) => theme['base-text']};
       background: ${({ theme }) => theme.background};
       -webkit-font-smoothing: antialiased;
 
@@ -41,5 +41,10 @@ export const GlobalStyle = createGlobalStyle`
       border: 0;
       background-color: transparent;
       cursor: pointer;
+   }
+
+   input {
+      border: 0;
+      outline: 0;
    }
 `
