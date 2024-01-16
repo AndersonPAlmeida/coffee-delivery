@@ -44,3 +44,8 @@ export const InputField = styled.input`
     -moz-appearance: textfield;
   }
 `
+
+export const ErrorMessage = styled.span`
+  ${stylesStandard.fonts.tag}
+  color: #DB2C2C;
+`

@@ -20,6 +20,7 @@ import {
   CheckoutContainer,
   DescriptionAddress,
   DescriptionPayment,
+  ErrorMessage,
   FieldInputContainer,
   FieldRadioContainer,
   Information,
@@ -47,11 +48,13 @@ type FormPurchase = zod.infer<typeof newFormPurchaseValidationSchema>
 
 export function Checkout() {
   const { cart } = useContext(CartContext)
-  const { register, handleSubmit /* formState */ } = useForm<FormPurchase>({
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<FormPurchase>({
     resolver: zodResolver(newFormPurchaseValidationSchema),
   })
-
-  // console.log(formState.errors)
 
   const valueTotalPurchase = cart.reduce((valuePurchase, cartItem) => {
     return cartItem.price * cartItem.quantity + valuePurchase
@@ -84,6 +87,7 @@ export function Checkout() {
               type="number"
               placeholder="CEP"
               id="cep"
+              error={errors.cep}
               {...register('cep', { valueAsNumber: true })}
             />
             <FieldInput
@@ -91,6 +95,7 @@ export function Checkout() {
               type="text"
               placeholder="Rua"
               id="street"
+              error={errors.street}
               {...register('street')}
             />
             <FieldInput
@@ -98,6 +103,7 @@ export function Checkout() {
               type="text"
               placeholder="Número"
               id="number"
+              error={errors.number}
               {...register('number')}
             />
             <FieldInput
@@ -106,6 +112,7 @@ export function Checkout() {
               type="text"
               placeholder="Complemento"
               id="complement"
+              error={errors.complement}
               {...register('complement')}
             />
             <FieldInput
@@ -113,6 +120,7 @@ export function Checkout() {
               type="text"
               placeholder="Bairro"
               id="district"
+              error={errors.district}
               {...register('district')}
             />
             <FieldInput
@@ -120,6 +128,7 @@ export function Checkout() {
               type="text"
               placeholder="Cidade"
               id="city"
+              error={errors.city}
               {...register('city')}
             />
             <FieldInput
@@ -127,6 +136,7 @@ export function Checkout() {
               type="text"
               placeholder="UF"
               id="uf"
+              error={errors.uf}
               {...register('uf')}
             />
           </FieldInputContainer>
@@ -170,6 +180,9 @@ export function Checkout() {
               <span>Dinheiro</span>
             </RadioField>
           </FieldRadioContainer>
+          {errors.paymentMethod && (
+            <ErrorMessage>{errors.paymentMethod.message}</ErrorMessage>
+          )}
         </TypePayment>
       </AddressAndTypePayment>
 
