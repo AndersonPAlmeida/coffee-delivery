@@ -1,28 +1,33 @@
 import {
+  FocusEvent,
   HTMLAttributes,
   InputHTMLAttributes,
   LegacyRef,
   forwardRef,
   useState,
 } from 'react'
-import { InputContainer, InputField, InputWrapper } from './style'
+import { ErrorMessage, InputContainer, InputField, InputWrapper } from './style'
+import { FieldError } from 'react-hook-form'
 
 type PropsInput = InputHTMLAttributes<HTMLInputElement> & {
   containerProps?: HTMLAttributes<HTMLDivElement>
   optional?: boolean
+  error?: FieldError
 }
 export const FieldInput = forwardRef(function FieldInput(
-  { containerProps, optional, ...rest }: PropsInput,
+  { containerProps, optional, onFocus, onBlur, error, ...rest }: PropsInput,
   ref: LegacyRef<HTMLInputElement>,
 ) {
   const [isInputFocused, setIsInputFocused] = useState(false)
 
-  function handleFocus() {
+  function handleFocus(event: FocusEvent<HTMLInputElement, Element>) {
     setIsInputFocused(true)
+    onFocus?.(event)
   }
 
-  function handleBlur() {
+  function handleBlur(event: FocusEvent<HTMLInputElement, Element>) {
     setIsInputFocused(false)
+    onBlur?.(event)
   }
 
   return (
@@ -36,6 +41,7 @@ export const FieldInput = forwardRef(function FieldInput(
         />
         {optional ? <span>Opcional</span> : null}
       </InputWrapper>
+      {error?.message ? <ErrorMessage>{error.message}</ErrorMessage> : null}
     </InputContainer>
   )
 })

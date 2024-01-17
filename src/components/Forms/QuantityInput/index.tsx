@@ -19,11 +19,11 @@ export function QuantityInput({
 }: Props) {
   return (
     <QuantityContainer>
-      <ButtonOperator onClick={decrementQuantity} {...rest}>
+      <ButtonOperator type="button" onClick={decrementQuantity} {...rest}>
         <Minus size={14} weight="bold" />
       </ButtonOperator>
       <span>{String(quantity).padStart(2, '0')}</span>
-      <ButtonOperator onClick={incrementQuantity}>
+      <ButtonOperator type="button" onClick={incrementQuantity}>
         <Plus size={14} weight="bold" />
       </ButtonOperator>
     </QuantityContainer>

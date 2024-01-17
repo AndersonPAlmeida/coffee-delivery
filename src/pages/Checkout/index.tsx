@@ -11,7 +11,7 @@ import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import * as zod from 'zod'
 import { ItemOrdered } from './components/ItemOrdered'
-import { FieldInput } from '../../components/Forms/InputField'
+import { FieldInput } from '../../components/Forms/FieldInput'
 import { RadioField } from '../../components/Forms/RadioField'
 import {
   Address,
