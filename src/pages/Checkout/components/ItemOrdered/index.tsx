@@ -18,7 +18,8 @@ interface Props {
 export function ItemOrdered({
   cartIten: { coffeeId, img, name, quantity, price },
 }: Props) {
-  const { incrementyItemCarty, decrementyItemCarty } = useContext(CartContext)
+  const { incrementyItemCarty, decrementyItemCarty, deleteItemCarty } =
+    useContext(CartContext)
   return (
     <ItemOrderedContainer>
       <Item>
@@ -32,7 +33,7 @@ export function ItemOrdered({
                 incrementQuantity={() => incrementyItemCarty(coffeeId)}
                 decrementQuantity={() => decrementyItemCarty(coffeeId)}
               />
-              <ButtonRemove>
+              <ButtonRemove onClick={() => deleteItemCarty(coffeeId)}>
                 <Trash size={16} />
                 Remover
               </ButtonRemove>

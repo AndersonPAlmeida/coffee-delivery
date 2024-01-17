@@ -18,6 +18,7 @@ interface ShoppingCartContextType {
   addCoffeeCart: (addItem: Cart) => void
   incrementyItemCarty: (idItem: string) => void
   decrementyItemCarty: (idItem: string) => void
+  deleteItemCarty: (idItem: string) => void
 }
 
 export const CartContext = createContext({} as ShoppingCartContextType)
@@ -57,8 +58,10 @@ export function CartContextProvider({ children }: ShoppingCartProps) {
 
   function decrementyItemCarty(idItem: string) {
     const updateItemCart = cart.map((item) => {
-      if (item.coffeeId === idItem) {
+      if (item.coffeeId === idItem && item.quantity > 1) {
         return { ...item, quantity: item.quantity - 1 }
+      } else if (item.coffeeId === idItem && item.quantity === 1) {
+        alert('Não é possível reduzir mais a quantidade.')
       }
       return { ...item }
     })
@@ -66,6 +69,16 @@ export function CartContextProvider({ children }: ShoppingCartProps) {
     setCart(updateItemCart)
   }
 
+  function deleteItemCarty(idItem: string) {
+    const deleteItemCart = cart.filter((item) => item.coffeeId !== idItem)
+
+    if (!confirm('Deseja mesmo retirar o café do carrinho?')) {
+      console.log('2, ', deleteItemCart)
+      return
+    }
+
+    setCart(deleteItemCart)
+  }
   return (
     <CartContext.Provider
       value={{
@@ -73,6 +86,7 @@ export function CartContextProvider({ children }: ShoppingCartProps) {
         addCoffeeCart,
         incrementyItemCarty,
         decrementyItemCarty,
+        deleteItemCarty,
       }}
     >
       {children}
