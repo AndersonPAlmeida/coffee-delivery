@@ -16,6 +16,8 @@ interface ShoppingCartContextType {
   orderId?: string
   cart: Cart[]
   addCoffeeCart: (addItem: Cart) => void
+  incrementyItemCarty: (idItem: string) => void
+  decrementyItemCarty: (idItem: string) => void
 }
 
 export const CartContext = createContext({} as ShoppingCartContextType)
@@ -37,8 +39,31 @@ export function CartContextProvider({ children }: ShoppingCartProps) {
         }
         return { ...coffee }
       })
+
       setCart(updateCart)
     }
+  }
+
+  function incrementyItemCarty(idItem: string) {
+    const updateItemCart = cart.map((item) => {
+      if (item.coffeeId === idItem) {
+        return { ...item, quantity: item.quantity + 1 }
+      }
+      return { ...item }
+    })
+
+    setCart(updateItemCart)
+  }
+
+  function decrementyItemCarty(idItem: string) {
+    const updateItemCart = cart.map((item) => {
+      if (item.coffeeId === idItem) {
+        return { ...item, quantity: item.quantity - 1 }
+      }
+      return { ...item }
+    })
+
+    setCart(updateItemCart)
   }
 
   return (
@@ -46,6 +71,8 @@ export function CartContextProvider({ children }: ShoppingCartProps) {
       value={{
         cart,
         addCoffeeCart,
+        incrementyItemCarty,
+        decrementyItemCarty,
       }}
     >
       {children}

@@ -8,15 +8,17 @@ import {
   ItemOrderedContainer,
   Separator,
 } from './style'
-import { Cart } from '../../../../contexts/CartContext'
+import { Cart, CartContext } from '../../../../contexts/CartContext'
+import { useContext } from 'react'
 
 interface Props {
   cartIten: Cart
 }
 
 export function ItemOrdered({
-  cartIten: { img, name, quantity, price },
+  cartIten: { coffeeId, img, name, quantity, price },
 }: Props) {
+  const { incrementyItemCarty, decrementyItemCarty } = useContext(CartContext)
   return (
     <ItemOrderedContainer>
       <Item>
@@ -25,7 +27,11 @@ export function ItemOrdered({
           <div>
             {name}
             <Operations>
-              <QuantityInput quantity={quantity} />
+              <QuantityInput
+                quantity={quantity}
+                incrementQuantity={() => incrementyItemCarty(coffeeId)}
+                decrementQuantity={() => decrementyItemCarty(coffeeId)}
+              />
               <ButtonRemove>
                 <Trash size={16} />
                 Remover
