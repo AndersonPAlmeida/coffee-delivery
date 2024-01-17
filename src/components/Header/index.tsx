@@ -8,6 +8,7 @@ import { CartContext } from '../../contexts/CartContext'
 export function Header() {
   const { cart } = useContext(CartContext)
   const isCartGreatherThanZero = cart.length
+  const isCartEmpty = cart.length !== 0
 
   return (
     <HeaderContainer>
@@ -20,12 +21,19 @@ export function Header() {
           <MapPin size={22} weight="fill" />
           Jequié, BA
         </button>
-        <NavLink to="/checkout">
-          <ShoppingCartSimple size={22} weight="fill" />
-          {isCartGreatherThanZero > 0 && (
-            <CountShop>{isCartGreatherThanZero}</CountShop>
-          )}
-        </NavLink>
+
+        {isCartEmpty ? (
+          <NavLink to="/checkout">
+            <ShoppingCartSimple size={22} weight="fill" />
+            {isCartGreatherThanZero > 0 && (
+              <CountShop>{isCartGreatherThanZero}</CountShop>
+            )}
+          </NavLink>
+        ) : (
+          <div>
+            <ShoppingCartSimple size={22} weight="fill" />
+          </div>
+        )}
       </nav>
     </HeaderContainer>
   )

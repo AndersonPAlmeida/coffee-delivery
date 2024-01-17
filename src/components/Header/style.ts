@@ -14,6 +14,7 @@ export const HeaderContainer = styled.header`
     align-items: center;
     gap: 1.2rem;
 
+    div,
     a,
     button {
       padding: 8px;
@@ -32,9 +33,13 @@ export const HeaderContainer = styled.header`
       cursor: pointer;
     }
 
+    div,
     a {
       color: ${({ theme }) => theme['yellow-dark']};
       background-color: ${({ theme }) => theme['yellow-light']};
+    }
+
+    a {
       position: relative;
     }
   }

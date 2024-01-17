@@ -63,6 +63,10 @@ export function Checkout() {
   const valueTotalPurchaseAndFreight = valueTotalPurchase + freight
 
   function handleNewPurchase(data: FormPurchase) {
+    const isCartEmpty = cart.length === 0
+    if (isCartEmpty) {
+      alert('Não há itens no arrrinho para realizar a compra.')
+    }
     console.log(data)
   }
 
