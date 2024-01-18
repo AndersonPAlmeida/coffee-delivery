@@ -23,7 +23,7 @@ export function Header() {
         </button>
 
         {isCartEmpty ? (
-          <NavLink to="/checkout">
+          <NavLink to="/order">
             <ShoppingCartSimple size={22} weight="fill" />
             {isCartGreatherThanZero > 0 && (
               <CountShop>{isCartGreatherThanZero}</CountShop>
