@@ -47,7 +47,7 @@ const newFormPurchaseValidationSchema = zod.object({
 type FormPurchase = zod.infer<typeof newFormPurchaseValidationSchema>
 
 export function Checkout() {
-  const { cart } = useContext(CartContext)
+  const { cart, cafes } = useContext(CartContext)
   const {
     register,
     handleSubmit,
@@ -56,9 +56,23 @@ export function Checkout() {
     resolver: zodResolver(newFormPurchaseValidationSchema),
   })
 
-  const valueTotalPurchase = cart.reduce((valuePurchase, cartItem) => {
+  const coffeesInCart = cart.map((item) => {
+    const coffeeInfo = cafes.find((coffee) => coffee.id === item.coffeeId)
+
+    if (!coffeeInfo) {
+      throw new Error('Café inexistente.')
+    }
+
+    return {
+      ...coffeeInfo,
+      quantity: item.quantity,
+    }
+  })
+
+  const valueTotalPurchase = coffeesInCart.reduce((valuePurchase, cartItem) => {
     return cartItem.price * cartItem.quantity + valuePurchase
   }, 0)
+
   const freight = 3.5
   const valueTotalPurchaseAndFreight = valueTotalPurchase + freight
 
@@ -191,8 +205,8 @@ export function Checkout() {
       </AddressAndTypePayment>
 
       <ItemsAndPayments>
-        {cart.map((itemCoffee) => (
-          <ItemOrdered key={itemCoffee.coffeeId} cartIten={itemCoffee} />
+        {coffeesInCart.map((itemCoffee) => (
+          <ItemOrdered key={itemCoffee.id} cartItem={itemCoffee} />
         ))}
 
         <Price>
