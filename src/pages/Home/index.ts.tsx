@@ -13,10 +13,12 @@ import {
   Timer,
   Coffee,
 } from '@phosphor-icons/react'
-import { coffees } from '../../../data.json'
 import { Product } from './Components/Product'
+import { useContext } from 'react'
+import { CartContext } from '../../contexts/CartContext'
 
 export function Home() {
+  const { cafes } = useContext(CartContext)
   return (
     <HomeContainer>
       <BannerContainer>
@@ -58,7 +60,7 @@ export function Home() {
       <Subtitle>Nossos cafés</Subtitle>
 
       <Products>
-        {coffees.map((coffee) => {
+        {cafes.map((coffee) => {
           return <Product key={coffee.id} coffee={coffee} />
         })}
       </Products>

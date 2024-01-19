@@ -1,20 +1,22 @@
 import { ReactNode, createContext, useState } from 'react'
-
+import { coffees } from '../../data.json'
+import { Cart } from '../reducers/cart/reducer'
 interface ShoppingCartProps {
   children: ReactNode
 }
 
-export interface Cart {
-  coffeeId: string
+interface Coffee {
+  id: string
   name: string
-  img: string
-  quantity: number
+  description: string
+  tags: string[]
   price: number
+  image: string
 }
 
 interface ShoppingCartContextType {
-  orderId?: string
   cart: Cart[]
+  cafes: Coffee[]
   addCoffeeCart: (addItem: Cart) => void
   incrementyItemCarty: (idItem: string) => void
   decrementyItemCarty: (idItem: string) => void
@@ -25,6 +27,11 @@ export const CartContext = createContext({} as ShoppingCartContextType)
 
 export function CartContextProvider({ children }: ShoppingCartProps) {
   const [cart, setCart] = useState<Cart[]>([])
+  const [cafes, setCafes] = useState<Coffee[]>([])
+
+  if (cafes.length === 0) {
+    setCafes([...coffees])
+  }
 
   function addCoffeeCart(addItem: Cart) {
     const coffeAlreadyExistInCart = cart.findIndex(
@@ -73,7 +80,6 @@ export function CartContextProvider({ children }: ShoppingCartProps) {
     const deleteItemCart = cart.filter((item) => item.coffeeId !== idItem)
 
     if (!confirm('Deseja mesmo retirar o café do carrinho?')) {
-      console.log('2, ', deleteItemCart)
       return
     }
 
@@ -82,6 +88,7 @@ export function CartContextProvider({ children }: ShoppingCartProps) {
   return (
     <CartContext.Provider
       value={{
+        cafes,
         cart,
         addCoffeeCart,
         incrementyItemCarty,

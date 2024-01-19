@@ -2,7 +2,8 @@ import { ShoppingCartSimple } from '@phosphor-icons/react'
 import { QuantityInput } from '../../../../components/Forms/QuantityInput'
 import { AddCart, Operation, ProductContainer, Tag } from './style'
 import { useContext, useState } from 'react'
-import { Cart, CartContext } from '../../../../contexts/CartContext'
+import { CartContext } from '../../../../contexts/CartContext'
+import { Cart } from '../../../../reducers/cart/reducer'
 
 interface Props {
   coffee: {
@@ -34,9 +35,6 @@ export function Product({ coffee }: Props) {
     const order: Cart = {
       coffeeId: coffee.id,
       quantity,
-      price: coffee.price,
-      name: coffee.name,
-      img: coffee.image,
     }
 
     addCoffeeCart(order)
