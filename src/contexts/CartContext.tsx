@@ -1,7 +1,10 @@
 import { ReactNode, createContext, useReducer, useState } from 'react'
 import { coffees } from '../../data.json'
 import { Cart, orderReducer } from '../reducers/cart/reducer'
-import { addNewItemAction } from '../reducers/cart/actions'
+import {
+  addNewItemAction,
+  incrementItemCartAction,
+} from '../reducers/cart/actions'
 interface ShoppingCartProps {
   children: ReactNode
 }
@@ -30,12 +33,12 @@ export function CartContextProvider({ children }: ShoppingCartProps) {
   // const [cart, setCart] = useState<Cart[]>([])
   const [cartState, dispatch] = useReducer(orderReducer, {
     cart: [],
-    orderInfo: [],
+    orderInfo: null,
   })
 
-  const { cart, orderInfo } = cartState
-
   const [cafes, setCafes] = useState<Coffee[]>([])
+
+  const { cart } = cartState
 
   if (cafes.length === 0) {
     setCafes([...coffees])
@@ -45,15 +48,16 @@ export function CartContextProvider({ children }: ShoppingCartProps) {
     dispatch(addNewItemAction(newItem))
   }
 
-  function incrementyItemCarty(idItem: string) {
-    const updateItemCart = cart.map((item) => {
-      if (item.coffeeId === idItem) {
-        return { ...item, quantity: item.quantity + 1 }
-      }
-      return { ...item }
-    })
+  function incrementyItemCarty(idItem: Cart['coffeeId']) {
+    dispatch(incrementItemCartAction(idItem))
+    // const updateItemCart = cart.map((item) => {
+    //   if (item.coffeeId === idItem) {
+    //     return { ...item, quantity: item.quantity + 1 }
+    //   }
+    //   return { ...item }
+    // })
 
-    setCart(updateItemCart)
+    // setCart(updateItemCart)
   }
 
   function decrementyItemCarty(idItem: string) {

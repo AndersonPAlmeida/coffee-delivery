@@ -15,13 +15,32 @@ interface AddNewItemAction {
   }
 }
 
-export type Actions = AddNewItemAction
+interface OperationsItemAction {
+  type:
+    | ActionTypes.INCREMENTY_ITEM_CART
+    | ActionTypes.DECREMENTY_ITEM_CART
+    | ActionTypes.DELETE_ITEM_CART
+  payload: {
+    coffeeId: Cart['coffeeId']
+  }
+}
+
+export type Actions = AddNewItemAction | OperationsItemAction
 
 export function addNewItemAction(newItem: Cart) {
   return {
     type: ActionTypes.ADD_COFFEE_CART,
     payload: {
       newItem,
+    },
+  } satisfies Actions
+}
+
+export function incrementItemCartAction(coffeeId: Cart['coffeeId']) {
+  return {
+    type: ActionTypes.INCREMENTY_ITEM_CART,
+    payload: {
+      coffeeId,
     },
   } satisfies Actions
 }
