@@ -44,3 +44,12 @@ export function incrementItemCartAction(coffeeId: Cart['coffeeId']) {
     },
   } satisfies Actions
 }
+
+export function decrementItemCartAction(coffeeId: Cart['coffeeId']) {
+  return {
+    type: ActionTypes.DECREMENTY_ITEM_CART,
+    payload: {
+      coffeeId,
+    },
+  } satisfies Actions
+}

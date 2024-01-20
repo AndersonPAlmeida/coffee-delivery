@@ -56,8 +56,18 @@ export function orderReducer(state: CartState, action: Actions) {
           }
         }),
       }
-    // break
-    // case ActionTypes.DECREMENTY_ITEM_CART:
+    case ActionTypes.DECREMENTY_ITEM_CART:
+      return {
+        ...state,
+        cart: state.cart.map((item) => {
+          if (item.coffeeId === action.payload.coffeeId && item.quantity > 1) {
+            const newQuantity = item.quantity - 1
+            return { ...item, quantity: newQuantity }
+          } else {
+            return item
+          }
+        }),
+      }
     // case ActionTypes.DELETE_ITEM_CART:
     // case ActionTypes.CHECKOUT_ORDER:
     default:

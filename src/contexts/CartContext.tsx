@@ -4,6 +4,7 @@ import { Cart, orderReducer } from '../reducers/cart/reducer'
 import {
   addNewItemAction,
   incrementItemCartAction,
+  decrementItemCartAction,
 } from '../reducers/cart/actions'
 interface ShoppingCartProps {
   children: ReactNode
@@ -50,27 +51,10 @@ export function CartContextProvider({ children }: ShoppingCartProps) {
 
   function incrementyItemCarty(idItem: Cart['coffeeId']) {
     dispatch(incrementItemCartAction(idItem))
-    // const updateItemCart = cart.map((item) => {
-    //   if (item.coffeeId === idItem) {
-    //     return { ...item, quantity: item.quantity + 1 }
-    //   }
-    //   return { ...item }
-    // })
-
-    // setCart(updateItemCart)
   }
 
-  function decrementyItemCarty(idItem: string) {
-    const updateItemCart = cart.map((item) => {
-      if (item.coffeeId === idItem && item.quantity > 1) {
-        return { ...item, quantity: item.quantity - 1 }
-      } else if (item.coffeeId === idItem && item.quantity === 1) {
-        alert('Não é possível reduzir mais a quantidade.')
-      }
-      return { ...item }
-    })
-
-    setCart(updateItemCart)
+  function decrementyItemCarty(idItem: Cart['coffeeId']) {
+    dispatch(decrementItemCartAction(idItem))
   }
 
   function deleteItemCarty(idItem: string) {
