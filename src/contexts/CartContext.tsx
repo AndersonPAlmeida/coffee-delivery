@@ -5,6 +5,7 @@ import {
   addNewItemAction,
   incrementItemCartAction,
   decrementItemCartAction,
+  deleteItemCartAction,
 } from '../reducers/cart/actions'
 interface ShoppingCartProps {
   children: ReactNode
@@ -58,13 +59,10 @@ export function CartContextProvider({ children }: ShoppingCartProps) {
   }
 
   function deleteItemCarty(idItem: string) {
-    const deleteItemCart = cart.filter((item) => item.coffeeId !== idItem)
-
     if (!confirm('Deseja mesmo retirar o café do carrinho?')) {
       return
     }
-
-    setCart(deleteItemCart)
+    dispatch(deleteItemCartAction(idItem))
   }
   return (
     <CartContext.Provider

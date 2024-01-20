@@ -53,3 +53,12 @@ export function decrementItemCartAction(coffeeId: Cart['coffeeId']) {
     },
   } satisfies Actions
 }
+
+export function deleteItemCartAction(coffeeId: Cart['coffeeId']) {
+  return {
+    type: ActionTypes.DELETE_ITEM_CART,
+    payload: {
+      coffeeId,
+    },
+  } satisfies Actions
+}

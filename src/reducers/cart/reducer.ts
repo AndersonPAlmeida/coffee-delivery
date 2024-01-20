@@ -68,7 +68,13 @@ export function orderReducer(state: CartState, action: Actions) {
           }
         }),
       }
-    // case ActionTypes.DELETE_ITEM_CART:
+    case ActionTypes.DELETE_ITEM_CART:
+      return {
+        ...state,
+        cart: state.cart.filter(
+          (item) => item.coffeeId !== action.payload.coffeeId,
+        ),
+      }
     // case ActionTypes.CHECKOUT_ORDER:
     default:
       return state
