@@ -32,7 +32,9 @@ import {
 } from './style'
 
 const newFormPurchaseValidationSchema = zod.object({
-  cep: zod.number({ invalid_type_error: 'Informe o cep' }),
+  cep: zod
+    .number({ invalid_type_error: 'Informe o cep' })
+    .min(8, 'Informe todos os dígitos do CEP'),
   street: zod.string().min(1, 'Informe a rua'),
   number: zod.string().min(1, 'Informe o número'),
   district: zod.string().min(1, 'Informe o bairro'),
@@ -47,7 +49,7 @@ const newFormPurchaseValidationSchema = zod.object({
 type FormPurchase = zod.infer<typeof newFormPurchaseValidationSchema>
 
 export function Checkout() {
-  const { cart, cafes } = useContext(CartContext)
+  const { cart, cafes, checkoutOrderInfo } = useContext(CartContext)
   const {
     register,
     handleSubmit,
@@ -81,7 +83,11 @@ export function Checkout() {
     if (isCartEmpty) {
       alert('Não há itens no arrrinho para realizar a compra.')
     }
-    console.log(data)
+    const newOrder = {
+      id: String(new Date().getTime()),
+      ...data,
+    }
+    checkoutOrderInfo(newOrder)
   }
 
   return (

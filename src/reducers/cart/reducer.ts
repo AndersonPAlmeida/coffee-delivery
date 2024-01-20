@@ -15,17 +15,21 @@ export interface OrderInfo {
   city: string
   uf: string
   paymentMethod: 'credit' | 'debit' | 'cash'
-  items: Cart[]
 }
 
+export interface OrderComplete extends OrderInfo {
+  items: Cart[]
+}
 export interface CartState {
   cart: Cart[]
-  orderInfo: OrderInfo[] | null
+  orderComplete: OrderComplete[]
 }
 
 export function orderReducer(state: CartState, action: Actions) {
   // console.log('state.cart', state.cart)
-  // console.log('action.payload.newItem', action)
+  // console.log('action.payload', action.payload)
+  let newOrder: OrderInfo
+  let newOrderComplete: OrderComplete
   switch (action.type) {
     case ActionTypes.ADD_COFFEE_CART:
       return {
@@ -75,7 +79,19 @@ export function orderReducer(state: CartState, action: Actions) {
           (item) => item.coffeeId !== action.payload.coffeeId,
         ),
       }
-    // case ActionTypes.CHECKOUT_ORDER:
+    case ActionTypes.CHECKOUT_ORDER:
+      newOrder = action.payload.orderInfo
+      newOrderComplete = {
+        ...newOrder,
+        items: state.cart,
+      }
+
+      action.payload.callback(`/order/${newOrder.id}/success`)
+      return {
+        ...state,
+        orderComplete: [...state.orderComplete, newOrderComplete],
+        cart: [],
+      }
     default:
       return state
   }

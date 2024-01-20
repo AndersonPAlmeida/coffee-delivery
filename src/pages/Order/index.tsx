@@ -43,7 +43,7 @@ export function Order() {
             </InformationTwo>
 
             <InformationThree>
-              <CurrencyDollar size={32} />
+              <CurrencyDollar size={32} weight="bold" />
               <p>
                 <span>Pagamento na entrega </span>
                 <strong>Cartão de Crédito</strong>
