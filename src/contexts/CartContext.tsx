@@ -1,6 +1,7 @@
-import { ReactNode, createContext, useState } from 'react'
+import { ReactNode, createContext, useReducer, useState } from 'react'
 import { coffees } from '../../data.json'
-import { Cart } from '../reducers/cart/reducer'
+import { Cart, orderReducer } from '../reducers/cart/reducer'
+import { addNewItemAction } from '../reducers/cart/actions'
 interface ShoppingCartProps {
   children: ReactNode
 }
@@ -26,30 +27,22 @@ interface ShoppingCartContextType {
 export const CartContext = createContext({} as ShoppingCartContextType)
 
 export function CartContextProvider({ children }: ShoppingCartProps) {
-  const [cart, setCart] = useState<Cart[]>([])
+  // const [cart, setCart] = useState<Cart[]>([])
+  const [cartState, dispatch] = useReducer(orderReducer, {
+    cart: [],
+    orderInfo: [],
+  })
+
+  const { cart, orderInfo } = cartState
+
   const [cafes, setCafes] = useState<Coffee[]>([])
 
   if (cafes.length === 0) {
     setCafes([...coffees])
   }
 
-  function addCoffeeCart(addItem: Cart) {
-    const coffeAlreadyExistInCart = cart.findIndex(
-      (cartCoffee) => cartCoffee.coffeeId === addItem.coffeeId,
-    )
-
-    if (coffeAlreadyExistInCart < 0) {
-      setCart([...cart, addItem])
-    } else {
-      const updateCart = cart.map((coffee) => {
-        if (coffee.coffeeId === addItem.coffeeId) {
-          return { ...coffee, quantity: addItem.quantity + coffee.quantity }
-        }
-        return { ...coffee }
-      })
-
-      setCart(updateCart)
-    }
+  function addCoffeeCart(newItem: Cart) {
+    dispatch(addNewItemAction(newItem))
   }
 
   function incrementyItemCarty(idItem: string) {
