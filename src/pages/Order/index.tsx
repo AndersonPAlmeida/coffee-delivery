@@ -12,8 +12,16 @@ import {
 } from './style'
 // eslint-disable-next-line import/no-absolute-path
 import illustrationOrder from '/IllustrationOrder.svg'
+import { useContext } from 'react'
+import { CartContext } from '../../contexts/CartContext'
+import { useParams } from 'react-router-dom'
 
 export function Order() {
+  const { orderComplete } = useContext(CartContext)
+  const { orderId } = useParams()
+
+  console.log(orderComplete, orderId)
+
   return (
     <OrderContainer>
       <Titles>

@@ -1,6 +1,11 @@
 import { ReactNode, createContext, useReducer, useState } from 'react'
 import { coffees } from '../../data.json'
-import { Cart, OrderInfo, orderReducer } from '../reducers/cart/reducer'
+import {
+  Cart,
+  OrderComplete,
+  OrderInfo,
+  orderReducer,
+} from '../reducers/cart/reducer'
 import {
   addNewItemAction,
   incrementItemCartAction,
@@ -26,6 +31,7 @@ export interface Coffee {
 interface ShoppingCartContextType {
   cart: Cart[]
   cafes: Coffee[]
+  orderComplete: OrderComplete[]
   addCoffeeCart: (addItem: Cart) => void
   incrementyItemCarty: (idItem: string) => void
   decrementyItemCarty: (idItem: string) => void
@@ -44,7 +50,7 @@ export function CartContextProvider({ children }: ShoppingCartProps) {
 
   const [cafes, setCafes] = useState<Coffee[]>([])
 
-  const { cart } = cartState
+  const { cart, orderComplete } = cartState
   const navigate = useNavigate()
 
   if (cafes.length === 0) {
@@ -84,6 +90,7 @@ export function CartContextProvider({ children }: ShoppingCartProps) {
         decrementyItemCarty,
         deleteItemCarty,
         checkoutOrderInfo,
+        orderComplete,
       }}
     >
       {children}
