@@ -1,4 +1,10 @@
-import { ReactNode, createContext, useReducer, useState } from 'react'
+import {
+  ReactNode,
+  createContext,
+  useEffect,
+  useReducer,
+  useState,
+} from 'react'
 import { coffees } from '../../data.json'
 import {
   Cart,
@@ -42,16 +48,38 @@ interface ShoppingCartContextType {
 export const CartContext = createContext({} as ShoppingCartContextType)
 
 export function CartContextProvider({ children }: ShoppingCartProps) {
-  // const [cart, setCart] = useState<Cart[]>([])
-  const [cartState, dispatch] = useReducer(orderReducer, {
-    cart: [],
-    orderComplete: [],
-  })
+  const [cartState, dispatch] = useReducer(
+    orderReducer,
+    {
+      cart: [],
+      orderComplete: [],
+    },
+    (initialState) => {
+      const storedStateAsJSON = localStorage.getItem(
+        '@ignite-coffee-delivey:cart-state-1.0.0',
+      )
+
+      if (storedStateAsJSON) {
+        return JSON.parse(storedStateAsJSON)
+      }
+
+      return initialState
+    },
+  )
 
   const [cafes, setCafes] = useState<Coffee[]>([])
 
   const { cart, orderComplete } = cartState
   const navigate = useNavigate()
+
+  useEffect(() => {
+    const cartStateJson = JSON.stringify(cartState)
+
+    localStorage.setItem(
+      '@ignite-coffee-delivey:cart-state-1.0.0',
+      cartStateJson,
+    )
+  }, [cartState])
 
   if (cafes.length === 0) {
     setCafes([...coffees])
