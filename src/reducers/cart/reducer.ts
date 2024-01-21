@@ -40,18 +40,19 @@ export function orderReducer(state: CartState, action: Actions) {
           draft.cart.push(action.payload.newItem)
         }
       })
-    case ActionTypes.INCREMENTY_ITEM_CART:
-      return {
-        ...state,
-        cart: state.cart.map((item) => {
-          if (item.coffeeId === action.payload.coffeeId) {
-            const newQuantity = item.quantity + 1
-            return { ...item, quantity: newQuantity }
-          } else {
-            return item
-          }
-        }),
-      }
+    case ActionTypes.INCREMENTY_ITEM_CART: {
+      return produce(state, (draft) => {
+        const coffeeCartyIndex = state.cart.findIndex(
+          (item) => item.coffeeId === action.payload.coffeeId,
+        )
+
+        if (coffeeCartyIndex < 0) {
+          return state
+        } else {
+          draft.cart[coffeeCartyIndex].quantity += 1
+        }
+      })
+    }
     case ActionTypes.DECREMENTY_ITEM_CART:
       return {
         ...state,
