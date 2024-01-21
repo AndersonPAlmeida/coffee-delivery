@@ -77,19 +77,17 @@ export function orderReducer(state: CartState, action: Actions) {
         }
       })
     case ActionTypes.CHECKOUT_ORDER:
-      action.payload.callback(`/order/${action.payload.orderInfo.id}/success`)
+      return produce(state, (draft) => {
+        const newOrder = {
+          ...action.payload.orderInfo,
+          items: state.cart,
+        }
 
-      return {
-        ...state,
-        orderComplete: [
-          ...state.orderComplete,
-          {
-            ...action.payload.orderInfo,
-            items: state.cart,
-          },
-        ],
-        cart: [],
-      }
+        draft.orderComplete.push(newOrder)
+        draft.cart = []
+
+        action.payload.callback(`/order/${newOrder.id}/success`)
+      })
     default:
       return state
   }
