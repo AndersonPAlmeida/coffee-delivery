@@ -65,12 +65,17 @@ export function orderReducer(state: CartState, action: Actions) {
         }
       })
     case ActionTypes.DELETE_ITEM_CART:
-      return {
-        ...state,
-        cart: state.cart.filter(
-          (item) => item.coffeeId !== action.payload.coffeeId,
-        ),
-      }
+      return produce(state, (draft) => {
+        const coffeeCartyIndex = state.cart.findIndex(
+          (item) => item.coffeeId === action.payload.coffeeId,
+        )
+
+        if (coffeeCartyIndex < 0) {
+          return state
+        } else {
+          draft.cart.splice(coffeeCartyIndex, 1)
+        }
+      })
     case ActionTypes.CHECKOUT_ORDER:
       action.payload.callback(`/order/${action.payload.orderInfo.id}/success`)
 
