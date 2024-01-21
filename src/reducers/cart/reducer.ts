@@ -1,4 +1,5 @@
 import { ActionTypes, Actions } from './actions'
+import { produce } from 'immer'
 
 export interface Cart {
   coffeeId: string
@@ -28,22 +29,17 @@ export interface CartState {
 export function orderReducer(state: CartState, action: Actions) {
   switch (action.type) {
     case ActionTypes.ADD_COFFEE_CART:
-      return {
-        ...state,
-        cart: state.cart.some(
+      return produce(state, (draft) => {
+        const hasCoffeeCarty = state.cart.findIndex(
           (item) => item.coffeeId === action.payload.newItem.coffeeId,
         )
-          ? state.cart.map((item) => {
-              if (item.coffeeId === action.payload.newItem.coffeeId) {
-                const newQuantity =
-                  item.quantity + action.payload.newItem.quantity
-                return { ...item, quantity: newQuantity }
-              } else {
-                return item
-              }
-            })
-          : [...state.cart, action.payload.newItem],
-      }
+
+        if (hasCoffeeCarty >= 0) {
+          draft.cart[hasCoffeeCarty].quantity += action.payload.newItem.quantity
+        } else {
+          draft.cart.push(action.payload.newItem)
+        }
+      })
     case ActionTypes.INCREMENTY_ITEM_CART:
       return {
         ...state,
