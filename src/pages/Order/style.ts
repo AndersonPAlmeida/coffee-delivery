@@ -96,3 +96,15 @@ export const Illustration = styled.section`
     width: 100%;
   }
 `
+
+export const OrderErro = styled.section`
+  ${stylesStandard.fonts.titleL}
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  color: ${({ theme }) => theme.red};
+
+  svg {
+    color: ${({ theme }) => theme.red};
+  }
+`

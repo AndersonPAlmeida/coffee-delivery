@@ -1,4 +1,4 @@
-import { CurrencyDollar, MapPin, Timer } from '@phosphor-icons/react'
+import { CurrencyDollar, MapPin, ReceiptX, Timer } from '@phosphor-icons/react'
 import {
   Illustration,
   InfoContainer,
@@ -9,6 +9,7 @@ import {
   InformationOne,
   InformationTwo,
   InformationThree,
+  OrderErro,
 } from './style'
 // eslint-disable-next-line import/no-absolute-path
 import illustrationOrder from '/IllustrationOrder.svg'
@@ -19,8 +20,23 @@ import { useParams } from 'react-router-dom'
 export function Order() {
   const { orderComplete } = useContext(CartContext)
   const { orderId } = useParams()
+  const paymentMethod = {
+    credit: 'Cartão de crédito',
+    debit: 'Cartão de débito',
+    cash: 'Dinheiro',
+  }
+  const hasOrder = orderComplete.find((order) => order.id === orderId)
 
-  console.log(orderComplete, orderId)
+  if (!hasOrder) {
+    return (
+      <OrderContainer>
+        <OrderErro>
+          <h1>Sem pedidos com essa Ordem de compra</h1>
+          <ReceiptX size={40} weight="fill" />
+        </OrderErro>
+      </OrderContainer>
+    )
+  }
 
   return (
     <OrderContainer>
@@ -36,9 +52,14 @@ export function Order() {
               <MapPin size={32} weight="fill" />
               <p>
                 <span>
-                  Entrega em <strong>Rua João Daniel Martinelli, 102 </strong>
+                  Entrega em{' '}
+                  <strong>
+                    Rua {hasOrder.street}, {hasOrder.number}
+                  </strong>
                 </span>
-                <span>Farrapos - Porto Alegre, RS</span>
+                <span>
+                  {hasOrder.district} - {hasOrder.city}, {hasOrder.uf}
+                </span>
               </p>
             </InformationOne>
 
@@ -54,7 +75,7 @@ export function Order() {
               <CurrencyDollar size={32} weight="bold" />
               <p>
                 <span>Pagamento na entrega </span>
-                <strong>Cartão de Crédito</strong>
+                <strong>{paymentMethod[hasOrder.paymentMethod]}</strong>
               </p>
             </InformationThree>
           </InfoContainer>

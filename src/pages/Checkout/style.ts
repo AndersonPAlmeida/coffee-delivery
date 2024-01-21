@@ -129,6 +129,6 @@ export const ButtonConfirm = styled.button`
 
 export const ErrorMessage = styled.span`
   ${stylesStandard.fonts.tag}
-  color: #DB2C2C;
+  color: ${({ theme }) => theme.red};
   margin-top: -1.6rem;
 `
